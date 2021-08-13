@@ -8,9 +8,14 @@ url = "http://127.0.0.1:7777"
 
 
 template_text = "kubectl port-forward po/%s 7777:7777"
-nodes = {"blockchain-testnet-boot-node-2",
-         "blockchain-testnet-boot-node-1",
-         "blockchain-testnet-boot-node-0"}
+nodes = {
+    "blockchain-testnet-consensus-node-0",
+    "blockchain-testnet-consensus-node-1",
+    "blockchain-testnet-consensus-node-2",
+    "blockchain-testnet-consensus-node-3",
+    "blockchain-testnet-consensus-node-4",
+    "blockchain-testnet-consensus-node-5"
+}
 
 
 def get_pbft_chain_size():
