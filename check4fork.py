@@ -36,9 +36,9 @@ def check_for_fork():
     old_block = ''
     old_node = ''
     for node in nodes:
-        child = subprocess.Popen(shlex.split(
-            template_text % node), stdout=subprocess.PIPE)
         try:
+            child = subprocess.Popen(shlex.split(
+            template_text % node), stdout=subprocess.PIPE)
             sleep(3)
             size = get_pbft_chain_size()
             if(lowest_chain > size):
