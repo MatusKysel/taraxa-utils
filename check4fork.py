@@ -8,14 +8,9 @@ url = "http://127.0.0.1:7777"
 
 
 template_text = "kubectl port-forward po/%s 7777:7777"
-nodes = {
-    "blockchain-testnet-consensus-node-0",
-    "blockchain-testnet-consensus-node-1",
-    "blockchain-testnet-consensus-node-2",
-    "blockchain-testnet-consensus-node-3",
-    "blockchain-testnet-consensus-node-4",
-    "blockchain-testnet-consensus-node-5"
-}
+#node_template = "blockchain-testnet-consensus-node-%s"
+node_template = "blockchain-devnet-consensus-node-%s"
+number_of_nodes = 18
 
 
 def get_pbft_chain_size():
@@ -35,10 +30,10 @@ def check_for_fork():
     lowest_chain = 999999999
     old_block = ''
     old_node = ''
-    for node in nodes:
+    for idx in range(number_of_nodes + 1):
         try:
             child = subprocess.Popen(shlex.split(
-            template_text % node), stdout=subprocess.PIPE)
+            template_text % (node_template % idx)), stdout=subprocess.PIPE)
             sleep(3)
             size = get_pbft_chain_size()
             if(lowest_chain > size):
@@ -47,7 +42,8 @@ def check_for_fork():
         except:
             child.terminate()
     print(lowest_chain)
-    for node in nodes:
+    for idx in range(number_of_nodes + 1):
+        node = node_template % idx
         child = subprocess.Popen(shlex.split(
             template_text % node), stdout=subprocess.PIPE)
         try:
