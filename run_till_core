@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Bash running $@"
+for i in {0..100}
+  do 
+    $@;
+    if [ -f core ]
+    then
+      echo "Core created"
+    break
+    fi
+
+ done

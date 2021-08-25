@@ -7,10 +7,12 @@ from time import sleep
 url = "http://127.0.0.1:9999"
 
 
-template_text = "kubectl port-forward po/%s 9999:7777"
-#node_template = "blockchain-testnet-consensus-node-%s"
-node_template = "blockchain-devnet-consensus-node-%s"
-number_of_nodes = 18
+template_text = "kubectl -n blockchain-testnet port-forward po/%s 9999:7777"
+node_template = "blockchain-testnet-consensus-node-%s"
+number_of_nodes = 6
+#template_text = "kubectl -n blockchain-devnet port-forward po/%s 9999:7777"
+#node_template = "blockchain-devnet-consensus-node-%s"
+#number_of_nodes = 19
 
 
 def get_pbft_chain_size():
@@ -29,7 +31,7 @@ def check_for_fork():
     lowest_chain = 999999999
     old_block = ''
     old_node = ''
-    for idx in range(number_of_nodes + 1):
+    for idx in range(number_of_nodes):
         node = node_template % idx
         child = subprocess.Popen(shlex.split(
             template_text % node), stdout=subprocess.PIPE)
@@ -44,7 +46,7 @@ def check_for_fork():
         except:
             child.terminate()
     print("smallest chain : " + old_node + " -> " + str(lowest_chain))
-    for idx in range(number_of_nodes + 1):
+    for idx in range(number_of_nodes):
         node = node_template % idx
         child = subprocess.Popen(shlex.split(
             template_text % node), stdout=subprocess.PIPE)
