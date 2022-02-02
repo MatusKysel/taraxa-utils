@@ -6,10 +6,10 @@ from time import sleep
 
 url = "http://127.0.0.1:9999"
 
-
 template_text = "kubectl -n blockchain-testnet port-forward po/%s 9999:7777"
 node_template = "blockchain-testnet-consensus-node-%s"
 number_of_nodes = 6
+#node_template = "blockchain-testnet-boot-node-%s"
 # template_text = "kubectl -n blockchain-devnet port-forward po/%s 9999:7777"
 # node_template = "blockchain-devnet-consensus-node-%s"
 # number_of_nodes = 19
@@ -27,7 +27,7 @@ def check_number_of_peers():
         child = subprocess.Popen(shlex.split(
             template_text % node), stdout=subprocess.PIPE)
         try:
-            sleep(3)
+            sleep(4)
             nodes, peers = get_node_status()
             print(node + " see " + str(nodes) + " nodes and is connected to " + str(peers) + " peers")
             child.terminate()
