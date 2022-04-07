@@ -10,10 +10,12 @@ url = "https://rpc." + net + "net.taraxa.io"
 get_url = "https://explorer." + net + "net.taraxa.io/api/nodes?limit=1000&week=" + \
     str(week) + "&year=2022"
 
+
 def get_stake(account):
     r = requests.post(url, data=json.dumps(
         {"jsonrpc": "2.0", "method": "taraxa_queryDPOS", "params": [{"account_queries": {account: {"with_staking_balance": True}}}], "id": 0}))
     return int(json.loads(r.text)["result"]["account_results"][account]["staking_balance"], 16) / 100000000000000000000000
+
 
 def number_of_nodes():
     output = {}
