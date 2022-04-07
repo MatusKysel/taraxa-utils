@@ -2,9 +2,9 @@ import json
 import requests
 from time import sleep
 
-#net = "test"
-net = "dev"
-week = 7
+net = "test"
+#net = "dev"
+week = 14
 
 url = "https://rpc." + net + "net.taraxa.io"
 get_url = "https://explorer." + net + "net.taraxa.io/api/nodes?limit=1000&week=" + \

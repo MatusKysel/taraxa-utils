@@ -6,13 +6,13 @@ from time import sleep
 
 url = "http://127.0.0.1:9999"
 
-template_text = "kubectl -n blockchain-testnet port-forward po/%s 9999:7777"
-node_template = "blockchain-testnet-consensus-node-%s"
-number_of_nodes = 6
-#node_template = "blockchain-testnet-boot-node-%s"
-# template_text = "kubectl -n blockchain-devnet port-forward po/%s 9999:7777"
-# node_template = "blockchain-devnet-consensus-node-%s"
-# number_of_nodes = 19
+# template_text = "kubectl -n blockchain-testnet port-forward po/%s 9999:7777"
+# node_template = "blockchain-testnet-consensus-node-%s"
+# number_of_nodes = 6
+node_template = "blockchain-testnet-boot-node-%s"
+template_text = "kubectl -n blockchain-devnet port-forward po/%s 9999:7777"
+node_template = "blockchain-devnet-consensus-node-%s"
+number_of_nodes = 19
 
 
 def get_node_status():
