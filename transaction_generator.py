@@ -3,10 +3,12 @@ from eth_account import Account
 import threading
 import secrets
 
-url = "https://rpc.testnet.taraxa.io"
+#url = "https://rpc.testnet.taraxa.io"
+url = "https://rpc.devnet.taraxa.io"
 #url = "https://rpc-pr-1676.prnet.taraxa.io"
 
 number_of_trx = 1000
+number_of_threads = 5
 
 def thread_functions(name):
     pk = "0x" + secrets.token_hex(32)
@@ -34,7 +36,7 @@ def test_connection():
 
 def transaction_benchmark():
     threads = list()
-    for index in range(10):
+    for index in range(number_of_threads):
         x = threading.Thread(target=thread_functions, args=(str(index),))
         threads.append(x)
         x.start()
